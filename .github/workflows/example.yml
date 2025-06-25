@@ -1,4 +1,4 @@
-name: build-hello-world
+name: fuzz-test-example
 
 on:
   push:
@@ -7,23 +7,24 @@ on:
     branches: [main]
 
 jobs:
-  build-hello-world:
+  fuzz-test:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
 
       - name: install g++
-        run: sudo apt install -y g++ cppcheck
+        run: sudo apt install -y g++ cppcheck clang++
 
-      - name: run cppcheck
+      - name: run build, test and fuzz test
         run: |
-          cppcheck hello_world.cpp --output-file=report.txt
-          if [ -s report.txt ]; then # if file is not empty
-            cat report.txt
+          mkdir build
+          cd build
+          cmake .. -DCMAKE_CXX_COMPILER=clang++
+          cmake --build . -- -j$(nproc)
+          ./math_utils_test
+          timeout 30 ./fuzz_math_utils || echo "Fuzz test crashed or timed out"
+          if ls crash-* 1> /dev/null 2>&1; then
+            hexdump -v -e '"%d, "' -e '8/1 "0x%02x, " "\n"' ./crash-*
             exit 1 # let github action fails
           fi
-
-      - name: check build
-        run: |
-          g++ hello_world.cpp -o hello_world
-          ./hello_world
+          echo "Build, test and fuzz test completed successfully"

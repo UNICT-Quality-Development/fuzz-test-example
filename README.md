@@ -6,7 +6,7 @@ cmake --build . -- -j$(nproc)
 ```
 
 ```
-timeout 30 ./build/fuzz_test || echo "::error ::Fuzz test crashed or timed out"
+timeout 30 ./fuzz_math_utils || echo "Fuzz test crashed or timed out"
 ```
 
 ```
