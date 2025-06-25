@@ -5,5 +5,5 @@ int main() {
 
   cout << "Hello World" << endl;
 
-  return xx 0;
+  return 0;
 }
