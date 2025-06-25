@@ -4,20 +4,39 @@ on:
   workflow_dispatch:
 
 jobs:
-  build-hello-world:
+  create-release:
     permissions: write-all
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - name: Create Release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: gh release create ${{ github.ref_name }} --generate-notes --title "Version ${{ github.ref_name }}"
 
-      - name: compile and run
-        run: g++ hello_world.cpp -o hello_world_linux
+  build-hello-world:
+    needs: create-release
+    permissions: write-all
+
+    strategy:
+      matrix:
+        include:
+          - os: ubuntu-latest
+            file_name: hello_world_linux
+          - os: macos-latest
+            file_name: hello_world_mac
+          - os: windows-latest
+            file_name: hello_world_windows.exe
+
+    runs-on: ${{ matrix.os }}
+    name: ${{ matrix.os }}
+
+    steps:
+      - uses: actions/checkout@v4
+      - name: compile
+        run: g++ hello_world.cpp -o ${{ matrix.file_name }}
 
       - name: Create Release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: >-
-          gh release create ${{ github.ref_name }}
-          "hello_world_linux"
-          --generate-notes
-          --title "Version ${{ github.ref_name }}"
+        run: gh release upload ${{ github.ref_name }} "${{ matrix.file_name}}"
