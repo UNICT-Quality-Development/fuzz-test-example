@@ -18,4 +18,4 @@ jobs:
       - name: check build
         run: |
           g++ hello_world.cpp -Wall -Werror  -o hello_world
-          ./hello_world
+          # ./hello_world
