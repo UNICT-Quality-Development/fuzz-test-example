@@ -5,9 +5,9 @@ int main() {
 //   int x;
 //   cout << x << endl;
 
-  int *p = nullptr;
+//   int *p = nullptr;
 
-  cout << *p <<  endl;
+//   cout << *p <<  endl;
 
   cout << "Hello World" << endl;
 
