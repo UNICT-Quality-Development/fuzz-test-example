@@ -8,6 +8,7 @@ int SafeDivide(int a, int b) {
         return 0; // Return 0 if division by zero
     }
 
+    // this is not a real solution but it's more a workaround
     if (a == INT_MIN && b < 0) {
         return 0;
     }

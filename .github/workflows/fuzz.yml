@@ -12,9 +12,6 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: install g++
-        run: sudo apt install -y g++ cppcheck
-
       - name: run build, test and fuzz test
         run: |
           mkdir build
