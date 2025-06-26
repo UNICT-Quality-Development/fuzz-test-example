@@ -22,9 +22,12 @@ jobs:
           cmake .. -DCMAKE_CXX_COMPILER=clang++
           cmake --build . -- -j$(nproc)
           ./math_utils_test
+
           timeout 30 ./fuzz_math_utils || echo "Fuzz test crashed or timed out"
+
           if ls crash-* 1> /dev/null 2>&1; then
             hexdump -v -e '"%d, "' -e '8/1 "0x%02x, " "\n"' ./crash-*
             exit 1 # let github action fails
           fi
+
           echo "Build, test and fuzz test completed successfully"

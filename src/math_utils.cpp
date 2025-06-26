@@ -8,9 +8,9 @@ int SafeDivide(int a, int b) {
         return 0; // Return 0 if division by zero
     }
 
-    // if (a == INT_MIN && b < 0) {
-    //     return 0;
-    // }
+    if (a == INT_MIN && b < 0) {
+        return 0;
+    }
 
     return a / b;
 }
