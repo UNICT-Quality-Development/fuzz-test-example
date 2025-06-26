@@ -4,9 +4,9 @@ This repository contains the source code for a fuzz testing example.
 
 It was created specifically for a presentation at the University of Catania, and is accompanied by slides used during the event.
 
-- [Event](https://web.dmi.unict.it/it/corsi/l-31/secure-systems-and-programmable-networks-tools-future)
-- [Slides](docs/)
-- [Teams Event + Video](https://teams.microsoft.com/l/meetup-join/19%3ameeting_OWI2ZmZmMmYtZmRjMS00NDE3LTliNWEtZGRlMDRjODU4Mzky%40thread.v2/0?context=%7b%22Tid%22%3a%22baeefbc8-3c8b-4382-9126-e86bfef46ce6%22%2c%22Oid%22%3a%22df66b55b-8f64-4ec5-b277-382df506a6f5%22%7d)
+- 📍 [Event](https://web.dmi.unict.it/it/corsi/l-31/secure-systems-and-programmable-networks-tools-future)
+- 📄 [Slides](docs/)
+- ▶️ [Teams Event + Video](https://teams.microsoft.com/l/meetup-join/19%3ameeting_OWI2ZmZmMmYtZmRjMS00NDE3LTliNWEtZGRlMDRjODU4Mzky%40thread.v2/0?context=%7b%22Tid%22%3a%22baeefbc8-3c8b-4382-9126-e86bfef46ce6%22%2c%22Oid%22%3a%22df66b55b-8f64-4ec5-b277-382df506a6f5%22%7d)
 
 ### Build the source
 
