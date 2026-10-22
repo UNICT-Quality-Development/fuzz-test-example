@@ -27,8 +27,12 @@ cd build
 ### Run fuzz test and read crash dump
 
 ```bash
-timeout 30 ./fuzz_math_utils || echo "Fuzz test crashed or timed out"
+env -u DEBUGINFOD_URLS timeout 30 ./fuzz_math_utils || echo "Fuzz test crashed or timed out"
 ```
+
+> [!NOTE]
+> Ubuntu sets `DEBUGINFOD_URLS` by default. When AddressSanitizer prints the crash report, `llvm-symbolizer` then tries to download the binary's missing debug info from `debuginfod.ubuntu.com`, which can take longer than the 30s timeout: the fuzzer gets killed before writing the `crash-*` file.
+> `env -u DEBUGINFOD_URLS` disables this lookup for a single command; to disable it permanently, add `unset DEBUGINFOD_URLS` to your `~/.bashrc`.
 
 There are multiple ways to read the crashdump, I strongly recommend **hexdump**.
 

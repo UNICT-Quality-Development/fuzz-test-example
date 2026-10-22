@@ -21,7 +21,8 @@ jobs:
           cmake --build . -- -j$(nproc)
           ./math_utils_test
 
-          timeout 30 ./fuzz_math_utils || echo "Fuzz test crashed or timed out"
+          # a slow debuginfod lookup during crash symbolization can outlast the timeout, leaving no crash-* file
+          env -u DEBUGINFOD_URLS timeout 30 ./fuzz_math_utils || echo "Fuzz test crashed or timed out"
 
           if ls crash-* 1> /dev/null 2>&1; then
             hexdump -v -e '"%d, "' -e '8/1 "0x%02x, " "\n"' ./crash-*
