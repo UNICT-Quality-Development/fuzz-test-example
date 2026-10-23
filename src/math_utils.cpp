@@ -9,9 +9,9 @@ int SafeDivide(int a, int b) {
     }
 
     // this is not a real solution but it's more a workaround
-    // if (a == INT_MIN && b < 0) {
-    //    return 0;
-    // }
+    if (a == INT_MIN && b < 0) {
+        return 0;
+    }
 
     return a / b;
 }
